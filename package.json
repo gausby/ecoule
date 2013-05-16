@@ -1,0 +1,28 @@
+{
+    "name": "ecoute",
+    "version": "0.0.1",
+    "description": "The Écoute static page engine core",
+    "author": "Martin Gausby <martin@gausby.dk>",
+    "repository": "git@github.com:gausby/ecoute.git",
+    "main": "lib/ecoute.js",
+    "dependencies": {
+        "operandi": "~0.0.4",
+        "pursuit": "~0.0.4"
+    },
+    "devDependencies": {
+        "grunt": ">= 0.4.0rc7",
+        "grunt-buster": ">= 0.1.2",
+        "grunt-contrib-jshint": ">= 0.1.0",
+        "grunt-contrib-watch": ">= 0.2.0rc7",
+        "grunt-clear": ">= 0.1.2",
+        "grunt-contrib-yuidoc": ">= 0.3.2",
+        "grunt-connect": ">= 0.2.0",
+
+        "buster": ">= 0.6.12"
+    },
+    "scripts": {
+        "start": "rlwrap node repl.js",
+        "test": "grunt test"
+    },
+    "engine": "*"
+}
