@@ -74,10 +74,10 @@ A transformer queries the data sources and transforms the data into the an outpu
 Consult the document [Building an Écoute Transformer](documentation/building-an-ecoute-transformer.md) for info on building a transformer of your own.
 
 
-### Outputters
-One or more outputters are given to a transformer, and they will receive the output from the transformer. Their task include, but are not limited to, writing the data to a disk; sending it to a destination on a network; or something third.
+### Outputs
+One or more outputs are given to a transformer, and they will receive the output from the transformer. An output could, but are not limited to, writing the data to a disk; sending it to a destination on a network; or something third.
 
-Consult the document [Building an Écoute Output](documentation/building-an-ecoute-output.md) for info on building a data handler of your own.
+Consult the document [Building an Écoute Output](documentation/building-an-ecoute-output.md) for info on building an transformer output of your own.
 
 
 ## Development
