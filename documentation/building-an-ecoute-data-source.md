@@ -1,4 +1,4 @@
-# Building an Écoute data source
+# Building an Écoute Data Source
 The following example is a minimal implementation of an Écoute Data Source.
 
     function Source (config) {
