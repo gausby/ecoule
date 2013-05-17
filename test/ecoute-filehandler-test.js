@@ -34,7 +34,7 @@ buster.testCase('A data-handler', {
             done();
         });
     },
-    'should handle files': function (done) {
+    'should handle matched files': function (done) {
         var ecoute = new Ecoute(mixin(basicConfig, {
             sources: [
                 mockSource({
@@ -80,6 +80,23 @@ buster.testCase('A data-handler', {
             refute.exception(function(){
                 ecoute.runDataHandlers(function(){});
             });
+
+            done();
+        });
+    },
+    'should compile a match function using Pursuit if an object is passed as the match function': function (done) {
+        var ecoute = new Ecoute(mixin(basicConfig, {
+            'data-handlers': [
+                mockDataHandler({
+                    match: { foo: {equals: 'bar'}}
+                })
+            ]
+        }));
+
+        serial.call(ecoute, [ecoute.initializeDataHandlers], function() {
+            assert.isFunction(ecoute.dataHandlers[0].match);
+            assert.isTrue(ecoute.dataHandlers[0].match({ foo: 'bar' }));
+            refute.isTrue(ecoute.dataHandlers[0].match({ foo: 'baz' }));
 
             done();
         });
