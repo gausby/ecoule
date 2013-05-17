@@ -47,8 +47,9 @@ buster.testCase('A data-handler', {
                     match: function () {
                         return true;
                     },
-                    execute: function (data, done) {
-                        done(undefined, data.title.toUpperCase());
+                    execute: function (entry, done) {
+                        entry.mock = entry.title.toUpperCase();
+                        done();
                     }
                 })
             ]
@@ -60,7 +61,7 @@ buster.testCase('A data-handler', {
             ecoute.runDataHandlers,
             function (done) {
                 assert.equals(
-                    ecoute.sources.first[0].processed.mock,
+                    ecoute.sources.first[0].mock,
                     'FOO'
                 );
                 return done();
