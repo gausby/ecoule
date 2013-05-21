@@ -80,7 +80,19 @@ One or more outputs are given to a transformer, and they will receive the output
 Consult the document [Building an Écoute Output](documentation/building-an-ecoute-output.md) for info on building an transformer output of your own.
 
 
-## Development
+## How to Contribute to the Project
+Please do file bugreports, feature requests, thoughts and improvements, ect., to the [Écoute Issue tracker][issue-tracker]. Feedback is more than welcome. It gives an insight into how others understand the project and where efforts should be made to simplify the code and clarify the documentation.
+
+[issue-tracker]: https://github.com/gausby/ecoute/issues
+
+The project is in its early phases and it needs documentation—and the documentation that had been written so far is in need of a review by a person with better english skills than mine, so, please, feel free to correct any spelling mistakes or grammatical errors. It will not hurt my feelings; I know that english is not my first language.
+
+Feel free to add links to any Écoute modules or tutorials on the [Wiki][wiki].
+
+[wiki]: https://github.com/gausby/ecoute/wiki/
+
+
+## Écoute Core Development
 After cloning the project you will have to run `npm install` in the project root. This will install the various grunt plugins and other dependencies.
 
 
