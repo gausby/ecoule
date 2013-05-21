@@ -1,11 +1,11 @@
 # Écoute - A Static Page Generator-Engine
-Écoute is a static page generator engine, written in JavaScript, that runs in a server side javascript-environment. It collects data from one or more sources, processes it and output it to one or more outputs.
+Écoute is a static page generator engine, written in JavaScript, that runs in a server side javascript-environment. It collects data from one or more sources, processes it, and output it to one or more outputs.
 
 It can, amongst other things, be used to build static blog generators.
 
 
 ## Life Cycle
-An Ecoute life cycle begins with reading a configuration object passed to its constructor. A configuration object can be empty, but the Ecoute instance will do nothing in that case.
+An Écoute life cycle begins with reading a configuration object passed to its constructor. A configuration object can be empty, but the Écouted-instance will do nothing in that case.
 
     var myEcoute = new Ecoute();
 
@@ -23,7 +23,7 @@ After this stage the data should be ready for **the transformation stage.** Each
 
 Each transformer can be configured with one or more outputs, and the transformer will pass its output to each of the output that it has been assigned in the configuration. During **the output stage** the result of the transformer could be written to a disk; passed to another program; etc.
 
-If the `refresh`-function on the Écoute-instance was called with a callback function, it will get call now. The callback should at least handle errors. This should be it. The `refresh`-function can be kept alive and called again, or it can be terminated.
+If the `refresh`-function on the Écoute-instance was called with a callback function, it will get call now. The callback should at least handle errors. This should be it. The Écoute-instance can be kept alive, altered, and `refresh` can be called again, or it can be terminated.
 
 
 ## Écoute Configuration Object
@@ -77,19 +77,24 @@ Consult the document [Building an Écoute Transformer](documentation/building-an
 ### Outputs
 One or more outputs are given to a transformer, and they will receive the output from the transformer. An output could, but are not limited to, writing the data to a disk; sending it to a destination on a network; or something third.
 
-Consult the document [Building an Écoute Output](documentation/building-an-ecoute-output.md) for info on building an transformer output of your own.
+Consult the document [Building an Écoute Output](documentation/building-an-ecoute-output.md) for info on building an Écoute transformer output of your own.
 
 
 ## How to Contribute to the Project
-Please do file bugreports, feature requests, thoughts and improvements, ect., to the [Écoute Issue tracker][issue-tracker]. Feedback is more than welcome. It gives an insight into how others understand the project and where efforts should be made to simplify the code and clarify the documentation.
+Please do file bug reports, feature requests, thoughts and improvements, etc., to the [Écoute Issue tracker][issue-tracker]. Feedback is more than welcome, and I would like to hear about your experiences using Écoute. It gives an insight into how others understand the project and where efforts should be made to simplify the code and clarify the documentation.
 
 [issue-tracker]: https://github.com/gausby/ecoute/issues
 
-The project is in its early phases and it needs documentation—and the documentation that had been written so far is in need of a review by a person with better english skills than mine, so, please, feel free to correct any spelling mistakes or grammatical errors. It will not hurt my feelings; I know that english is not my first language.
+The project is in its early phases and it needs documentation—and the documentation that had been written so far is in need of a review by a person with better english skills than mine, so, please, feel free to correct spelling mistakes, wordings, or grammatical errors. It will not hurt my feelings; I know that english is not my first language.
 
 Feel free to add links to any Écoute modules or tutorials on the [Wiki][wiki].
 
 [wiki]: https://github.com/gausby/ecoute/wiki/
+
+Also, drop by [#ecoute][ecoute-irc-chan] on [irc.freenode.net][freenode].
+
+[freenode]: http://irc.freenode.net/
+[ecoute-irc-chan]: irc://irc.freenode.net/ecoute
 
 
 ## Écoute Core Development
