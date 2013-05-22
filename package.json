@@ -1,6 +1,6 @@
 {
     "name": "ecoute",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "The Écoute static page engine core",
     "author": "Martin Gausby <martin@gausby.dk>",
     "repository": "git@github.com:gausby/ecoute.git",
