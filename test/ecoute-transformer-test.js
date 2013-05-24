@@ -168,5 +168,32 @@ buster.testCase('A transformer', {
                 return done();
             }
         ], done);
+    },
+
+    'should run preprocessors on transformers before running its execute function': function (done) {
+        // assign a foo value on a transformer and alter that value with a
+        // preprocessor and then the execute function
+        var test = mockTransformer({
+            execute: function (done) {
+                this.foo += 'baz';
+                return done(undefined, this.foo);
+            },
+            preprocessors: [function(done) {
+                this.foo += this.foo;
+                return done();
+            }],
+            outputs: [{
+                execute: function (data, done) {
+                    assert.equals(data, 'barbarbaz');
+                    return done();
+                }
+            }]
+        });
+
+        test.foo = 'bar';
+        var ecoute = new Ecoute(mixin(basicConfig, { transformers: [test] }));
+        ecoute.runTransformers(done);
+    },
+    '//should run postprocessors on the output before giving it to the outputs': function () {
     }
 });
