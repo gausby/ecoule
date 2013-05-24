@@ -77,3 +77,33 @@ The queries are build using the [Pursuit][pursuit]-library. Have a look in the P
 [pursuit]: https://github.com/gausby/pursuit
 
 **Notice**, `outputs`, `queries`, `preprocessors`, and `postprocessors` are reserved keywords, and should not be used to store results of queries.
+
+
+## Pre and Post Processors
+Functions can be run before and after the transformers execute function is run. These are simple functions that both takes a callback-function, conventionally called `done`.
+
+The pre and post processors are stored in arrays on the transformer with the key-names `preprocessors` and `postprocessors`. This is the essential code to support processors:
+
+    function Transformer (config) {
+        config = config || {};
+        this.preprocessors = config.preprocessors || [];
+        this.postprocessors = config.postprocessors || [];
+    }
+
+    module.exports = function (config) {
+        return (new Transformer(config));
+    };
+
+Obviously, if no processors has been given, ie. input is an empty array, the pre and post processing steps will be ignored.
+
+
+### Pre Processor Functions
+Executed just before the transformer runs its execute function. The `this`-context of a preprocessor is the transformer object itself.
+
+These can be used to alter that values set on a transformer, sort a list of elements by date, etc.
+
+
+### Post Processor Functions
+Executed after the transformer has returned its output and just before it is given to the outputers. The `this`-context of a postprocessor is the output of the transformer.
+
+These can be used to optimize, or otherwise alter, the output of a transformer.
