@@ -1,10 +1,10 @@
 {
-    "name": "ecoute",
+    "name": "ecoule",
     "version": "0.0.5",
-    "description": "The Écoute static page engine core",
+    "description": "The Écoule static page engine core",
     "author": "Martin Gausby <martin@gausby.dk>",
-    "repository": "git@github.com:gausby/ecoute.git",
-    "main": "lib/ecoute.js",
+    "repository": "git@github.com:gausby/ecoule.git",
+    "main": "lib/ecoule.js",
     "dependencies": {
         "operandi": "~0.0.4",
         "pursuit": "~0.0.4"

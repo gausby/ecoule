@@ -3,7 +3,7 @@
 'use strict';
 
 var buster = require('buster'),
-    Ecoute = require('../lib/ecoute'),
+    Ecoule = require('../lib/ecoule'),
     mixin = require('./helpers/mixin'),
     mockSource = require('./mocks/source'),
     mockTransformer = require('./mocks/transformer'),
@@ -17,17 +17,17 @@ var basicConfig = {};
 
 buster.testCase('A transformer', {
     'should not do anything if there is no transformers defined': function(done){
-        var ecoute = new Ecoute(mixin(basicConfig));
+        var ecoule = new Ecoule(mixin(basicConfig));
 
         refute.exception(function() {
-            ecoute.initializeTransformers(function () {
+            ecoule.initializeTransformers(function () {
                 done();
             });
         });
     },
 
     'should be initialized if it has an initialize function': function (done) {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             transformers: [mockTransformer({
                 initialize: function (done) {
                     this.foo = 'bar';
@@ -36,17 +36,17 @@ buster.testCase('A transformer', {
             })]
         }));
 
-        serial.call(ecoute, [
-            ecoute.initializeTransformers,
+        serial.call(ecoule, [
+            ecoule.initializeTransformers,
             function (done) {
-                assert.equals(ecoute.transformers[0].foo, 'bar');
+                assert.equals(ecoule.transformers[0].foo, 'bar');
                 return done();
             }
         ], done);
     },
 
     'should have its query compiled into a function if it has a query': function (done) {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             transformers: [mockTransformer({
                 queries: {
                     mock: {
@@ -56,13 +56,13 @@ buster.testCase('A transformer', {
             })]
         }));
 
-        serial.call(ecoute, [
-            ecoute.initializeTransformers,
+        serial.call(ecoule, [
+            ecoule.initializeTransformers,
             function (done) {
-                assert.isFunction(ecoute.transformers[0].queries.mock);
+                assert.isFunction(ecoule.transformers[0].queries.mock);
                 // the query language is tested elsewhere
-                assert.isTrue(ecoute.transformers[0].queries.mock({'foo': 'bar'}));
-                refute.isTrue(ecoute.transformers[0].queries.mock({'foo': 'baz'}));
+                assert.isTrue(ecoule.transformers[0].queries.mock({'foo': 'bar'}));
+                refute.isTrue(ecoule.transformers[0].queries.mock({'foo': 'baz'}));
 
                 return done();
             }
@@ -70,7 +70,7 @@ buster.testCase('A transformer', {
     },
 
     'should filter files based on a query language and only have those files given to its execute function': function (done) {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             sources: [
                 mockSource({
                     'title': 'first',
@@ -97,16 +97,16 @@ buster.testCase('A transformer', {
             })]
         }));
 
-        serial.call(ecoute, [
-            ecoute.initializeSources,
-            ecoute.refreshSources,
-            ecoute.initializeTransformers,
-            ecoute.runTransformers
+        serial.call(ecoule, [
+            ecoule.initializeSources,
+            ecoule.refreshSources,
+            ecoule.initializeTransformers,
+            ecoule.runTransformers
         ], done);
     },
 
     'if no sources is specified it should query all the sources': function (done) {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             sources: [
                 mockSource({
                     'title': 'first',
@@ -132,16 +132,16 @@ buster.testCase('A transformer', {
             })]
         }));
 
-        serial.call(ecoute, [
-            ecoute.initializeSources,
-            ecoute.refreshSources,
-            ecoute.initializeTransformers,
-            ecoute.runTransformers
+        serial.call(ecoule, [
+            ecoule.initializeSources,
+            ecoule.refreshSources,
+            ecoule.initializeTransformers,
+            ecoule.runTransformers
         ], done);
     },
 
     'should be able to mutate the data in the sources': function (done) {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             sources: [
                 mockSource({'title': 'first', 'entries': [{foo: 'baz'}]})
             ],
@@ -156,14 +156,14 @@ buster.testCase('A transformer', {
             })]
         }));
 
-        serial.call(ecoute, [
-            ecoute.initializeSources,
-            ecoute.refreshSources,
-            ecoute.initializeTransformers,
-            ecoute.runTransformers,
+        serial.call(ecoule, [
+            ecoule.initializeSources,
+            ecoule.refreshSources,
+            ecoule.initializeTransformers,
+            ecoule.runTransformers,
             function (done) {
-                assert.defined(ecoute.sources.first[0].foo);
-                assert.equals(ecoute.sources.first[0].foo, 'bar');
+                assert.defined(ecoule.sources.first[0].foo);
+                assert.equals(ecoule.sources.first[0].foo, 'bar');
 
                 return done();
             }
@@ -191,8 +191,8 @@ buster.testCase('A transformer', {
         });
 
         test.foo = 'bar';
-        var ecoute = new Ecoute(mixin(basicConfig, { transformers: [test] }));
-        ecoute.runTransformers(done);
+        var ecoule = new Ecoule(mixin(basicConfig, { transformers: [test] }));
+        ecoule.runTransformers(done);
     },
 
     'should run postprocessors on the transformer output before giving it to the outputs': function (done) {
@@ -216,7 +216,7 @@ buster.testCase('A transformer', {
         });
 
         test.foo = 'bar';
-        var ecoute = new Ecoute(mixin(basicConfig, { transformers: [test] }));
-        ecoute.runTransformers(done);
+        var ecoule = new Ecoule(mixin(basicConfig, { transformers: [test] }));
+        ecoule.runTransformers(done);
     }
 });

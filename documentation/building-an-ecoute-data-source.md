@@ -1,5 +1,5 @@
-# Building an Écoute Data Source
-The following example is a minimal implementation of an Écoute Data Source.
+# Building an Écoule Data Source
+The following example is a minimal implementation of an Écoule Data Source.
 
     function Source (config) {
         // a Source require a 'title' property
@@ -7,7 +7,7 @@ The following example is a minimal implementation of an Écoute Data Source.
     }
 
     // This is the step that will fetch the actual data.
-    // If the error variable is set to an Error, the Écoute instance
+    // If the error variable is set to an Error, the Écoule instance
     // will be terminated and throw this error to its callback
     Source.prototype.refresh = function(done) {
         var data = []; // return data
@@ -47,17 +47,17 @@ The `refresh`-function receives an callback function as its first argument, that
         return (new Source(options || {}));
     };
 
-**Notice**, it is a *strict requirement to execute `done`* at some point, otherwise the source will just hang, and thus hang the entire parent Écoute-insatance, which is patient; it can hang forever.
+**Notice**, it is a *strict requirement to execute `done`* at some point, otherwise the source will just hang, and thus hang the entire parent Écoule-insatance, which is patient; it can hang forever.
 
 If the Source use a workflow controle library, such as [Operandi](https://github.com/gausby/operandi), the done-callback can be passed around and called when every task in the source has been completed.
 
 
 ## Source Initialization
-If the Data Source implements an `initialize`-function it will get called just after the main Écoute-initialization, along with all the other initialization functions.
+If the Data Source implements an `initialize`-function it will get called just after the main Écoule-initialization, along with all the other initialization functions.
 
 
 ### Why Implement a Initialize Function Instead of Using a Constructor?
-If the following pattern is used, the constructor will get called when the Écoute-configuration is passed to the Écoute-instance, which is not always desirable.
+If the following pattern is used, the constructor will get called when the Écoule-configuration is passed to the Écoule-instance, which is not always desirable.
 
     function Source (config) {
         // a Source require a 'title' property
@@ -68,15 +68,15 @@ If the following pattern is used, the constructor will get called when the Écou
         return (new Source(config || {}));
     };
 
-Only small blocking operations, such as setting simple properties on the instance, like `this.title = config.title;` should be done here, as there otherwise is no guarantee that a slow, asynchronous operation would complete before Écoute will reach the data collection stage.
+Only small blocking operations, such as setting simple properties on the instance, like `this.title = config.title;` should be done here, as there otherwise is no guarantee that a slow, asynchronous operation would complete before Écoule will reach the data collection stage.
 
-The initialize function is the way to go, because it can report back when its operation is done, and it provides a way to stop the Écoute-instance from running if it hits a fatal error.
+The initialize function is the way to go, because it can report back when its operation is done, and it provides a way to stop the Écoule-instance from running if it hits a fatal error.
 
 
 ### Handling Initialization Failure
 This is a good opportunity to check for dependencies and permissions, and inform the end-user with a friendly error message, give a hint about what to fix, before the other sources has a change do heavy operations, such as downloading resources from the internet, or traversing a file-system.
 
-The following example shows an module that will terminate an Écoute-instance with an error.
+The following example shows an module that will terminate an Écoule-instance with an error.
 
     function Source (config) {
         this.config = config;
@@ -94,6 +94,6 @@ The following example shows an module that will terminate an Écoute-instance wi
         return (new Source(config || {}));
     };
 
-This will pass the error to the Écoute-instance, halt everything, and let the callback of the instance handle the error. In most cases you will just pass an error back like this.
+This will pass the error to the Écoule-instance, halt everything, and let the callback of the instance handle the error. In most cases you will just pass an error back like this.
 
 If the Source initialize without any errors, call `return done();` without any arguments when everything is done and ready.

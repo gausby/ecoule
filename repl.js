@@ -2,8 +2,8 @@
 'use strict';
 
 var repl = require('repl'),
-    Ecoute = require('./lib/ecoute')
+    Ecoule = require('./lib/ecoule')
 ;
 
 var local = repl.start('> ');
-local.context.Ecoute = Ecoute;
+local.context.Ecoule = Ecoule;

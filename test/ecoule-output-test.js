@@ -3,7 +3,7 @@
 'use strict';
 
 var buster = require('buster'),
-    Ecoute = require('../lib/ecoute'),
+    Ecoule = require('../lib/ecoule'),
     mixin = require('./helpers/mixin'),
     mockTransformer = require('./mocks/transformer'),
     mockOutput = require('./mocks/output')
@@ -16,13 +16,13 @@ var basicConfig = {};
 
 buster.testCase('An output', {
     'should not return an error if no output is set': function (done) {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             transformers: [mockTransformer({
                 outputs: []
             })]
         }));
 
-        ecoute.initializeOutputs(function (err) {
+        ecoule.initializeOutputs(function (err) {
             refute.defined(err);
             done();
         });
@@ -31,7 +31,7 @@ buster.testCase('An output', {
     'should initialize an output that has an initialize function': function (done) {
         var test = false;
 
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             transformers: [mockTransformer({
                 outputs: [mockOutput({
                     initialize: function (done) {
@@ -42,7 +42,7 @@ buster.testCase('An output', {
             })]
         }));
 
-        ecoute.initializeOutputs(function () {
+        ecoule.initializeOutputs(function () {
             assert.isTrue(test);
             done();
         });
@@ -51,7 +51,7 @@ buster.testCase('An output', {
     'should be able to initialize multiple outputs': function (done) {
         var foo = false, bar = false, baz = false;
 
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             transformers: [mockTransformer({
                 outputs: [
                     mockOutput({
@@ -77,7 +77,7 @@ buster.testCase('An output', {
             })]
         }));
 
-        ecoute.initializeOutputs(function () {
+        ecoule.initializeOutputs(function () {
             assert.isTrue(foo);
             assert.isTrue(bar);
             assert.isTrue(baz);
@@ -86,7 +86,7 @@ buster.testCase('An output', {
     },
 
     'should receive the output from a transformer': function (done) {
-        var ecoute = new Ecoute({ transformers: [mockTransformer({
+        var ecoule = new Ecoule({ transformers: [mockTransformer({
             execute: function(done) {
                 done(undefined, [{foo: 'bar'}]);
             },
@@ -101,7 +101,7 @@ buster.testCase('An output', {
             ]
         })]});
 
-        ecoute.runTransformers(function(err) {
+        ecoule.runTransformers(function(err) {
             refute.defined(err);
             done();
         });

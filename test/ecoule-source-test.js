@@ -3,7 +3,7 @@
 'use strict';
 
 var buster = require('buster'),
-    Ecoute = require('../lib/ecoute'),
+    Ecoule = require('../lib/ecoule'),
     mixin = require('./helpers/mixin'),
     mockSource = require('./mocks/source'),
     serial = require('operandi').serial
@@ -16,27 +16,27 @@ var basicConfig = {};
 
 buster.testCase('A source', {
     'should just pass through if no sources is given': function () {
-        var ecoute = new Ecoute(mixin(basicConfig, {}));
+        var ecoule = new Ecoule(mixin(basicConfig, {}));
 
-        ecoute.initializeSources();
+        ecoule.initializeSources();
 
-        assert.equals(Object.keys(ecoute.sources).length, 0);
+        assert.equals(Object.keys(ecoule.sources).length, 0);
     },
 
-    'should have an object created in the ecoute source storage object': function () {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+    'should have an object created in the ecoule source storage object': function () {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             sources: [mockSource({
                 'title': 'Source Title'
             })]
         }));
 
-        ecoute.initializeSources();
+        ecoule.initializeSources();
 
-        assert.isObject(ecoute.sources['Source Title']);
+        assert.isObject(ecoule.sources['Source Title']);
     },
 
     'should be able to have multiple instances with different configurations': function (done) {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             sources: [
                 mockSource({
                     'title': 'First Source',
@@ -49,11 +49,11 @@ buster.testCase('A source', {
             ]
         }));
 
-        serial.call(ecoute, [
-            ecoute.initializeSources,
-            ecoute.refreshSources,
+        serial.call(ecoule, [
+            ecoule.initializeSources,
+            ecoule.refreshSources,
             function (done) {
-                assert.equals(ecoute.sources, {
+                assert.equals(ecoule.sources, {
                     'First Source': [ { title: 'A' }, { title: 'C' } ],
                     'Second Source': [ { title: 'B' }, { title: 'D' } ]
                 });

@@ -1,6 +1,6 @@
-Building an Écoute Transformer
+Building an Écoule Transformer
 ==============================
-The following example is a minimal implementation of an Écoute transformer.
+The following example is a minimal implementation of an Écoule transformer.
 
     function Transformer (config) {
         config = config || {};
@@ -28,7 +28,7 @@ Initialize, outputs, and Pre- and post-processors are optional. Technically quer
 
 
 ## Initialization Function
-As with any Écoute plugin, an initialization step will be run if the plugin implements an `initialize` function that recieves a callback as the first argument. If an error is passed to the callback the entire Écoute instance will get terminated.
+As with any Écoule plugin, an initialization step will be run if the plugin implements an `initialize` function that recieves a callback as the first argument. If an error is passed to the callback the entire Écoule instance will get terminated.
 
 
 ## Execute Function
@@ -38,13 +38,13 @@ The execute function will trigger the transformer, and receives the done-callbac
 
   * `output`, the result of the transormation. Usualy you would like to return an object with key-values that the given outputers can work with.
 
-The execute function will get called after Écoute has collected all data from the sources and run it through the optional data handlers.
+The execute function will get called after Écoule has collected all data from the sources and run it through the optional data handlers.
 
 The result of the transformation will get passed to the configured outputers.
 
 
 ### Getting Data From the Sources into the Execute Function
-The scope of the execute function is the scope of the execute function itself. It has no access to the Écoute instance, except for the data that will get exposed to it. To get access to the data from the sources, queries can be defined—the result of these queries will be variables containing the queried data.
+The scope of the execute function is the scope of the execute function itself. It has no access to the Écoule instance, except for the data that will get exposed to it. To get access to the data from the sources, queries can be defined—the result of these queries will be variables containing the queried data.
 
 The the following example will collect all the articles that has a title that starts with an "A" and expose it to the transformer in a variable called `bananas`.
 

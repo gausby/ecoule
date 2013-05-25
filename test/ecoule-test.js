@@ -3,7 +3,7 @@
 'use strict';
 
 var buster = require('buster'),
-    Ecoute = require('../lib/ecoute'),
+    Ecoule = require('../lib/ecoule'),
     mixin = require('./helpers/mixin')
 ;
 
@@ -12,4 +12,4 @@ var refute = buster.assertions.refute;
 
 var basicConfig = {};
 
-buster.testCase('Ecoute Engine', {});
+buster.testCase('Ecoule Engine', {});

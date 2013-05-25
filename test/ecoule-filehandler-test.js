@@ -3,7 +3,7 @@
 'use strict';
 
 var buster = require('buster'),
-    Ecoute = require('../lib/ecoute'),
+    Ecoule = require('../lib/ecoule'),
     mixin = require('./helpers/mixin'),
     mockSource = require('./mocks/source'),
     mockDataHandler = require('./mocks/fileHandler'),
@@ -18,7 +18,7 @@ var basicConfig = {};
 buster.testCase('A data-handler', {
     'should run an initialize function if it has one': function (done) {
         var ran = false;
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             'data-handlers': [
                 mockDataHandler({
                     initialize: function(done) {
@@ -29,13 +29,13 @@ buster.testCase('A data-handler', {
             ]
         }));
 
-        ecoute.initializeDataHandlers(function (err) {
+        ecoule.initializeDataHandlers(function (err) {
             assert.isTrue(ran);
             done();
         });
     },
     'should handle matched files': function (done) {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             sources: [
                 mockSource({
                     'title': 'first',
@@ -55,13 +55,13 @@ buster.testCase('A data-handler', {
             ]
         }));
 
-        serial.call(ecoute, [
-            ecoute.initializeSources,
-            ecoute.refreshSources,
-            ecoute.runDataHandlers,
+        serial.call(ecoule, [
+            ecoule.initializeSources,
+            ecoule.refreshSources,
+            ecoule.runDataHandlers,
             function (done) {
                 assert.equals(
-                    ecoute.sources.first[0].mock,
+                    ecoule.sources.first[0].mock,
                     'FOO'
                 );
                 return done();
@@ -70,22 +70,22 @@ buster.testCase('A data-handler', {
     },
 
     'should just pass through if no filehandlers has been specified': function (done) {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             sources: [
                 mockSource({'title': 'first', 'entries': [{'title': 'foo'}]})
             ]
         }));
 
-        serial.call(ecoute, [ecoute.initializeSources, ecoute.refreshSources], function() {
+        serial.call(ecoule, [ecoule.initializeSources, ecoule.refreshSources], function() {
             refute.exception(function(){
-                ecoute.runDataHandlers(function(){});
+                ecoule.runDataHandlers(function(){});
             });
 
             done();
         });
     },
     'should compile a match function using Pursuit if an object is passed as the match function': function (done) {
-        var ecoute = new Ecoute(mixin(basicConfig, {
+        var ecoule = new Ecoule(mixin(basicConfig, {
             'data-handlers': [
                 mockDataHandler({
                     match: { foo: {equals: 'bar'}}
@@ -93,10 +93,10 @@ buster.testCase('A data-handler', {
             ]
         }));
 
-        serial.call(ecoute, [ecoute.initializeDataHandlers], function() {
-            assert.isFunction(ecoute.dataHandlers[0].match);
-            assert.isTrue(ecoute.dataHandlers[0].match({ foo: 'bar' }));
-            refute.isTrue(ecoute.dataHandlers[0].match({ foo: 'baz' }));
+        serial.call(ecoule, [ecoule.initializeDataHandlers], function() {
+            assert.isFunction(ecoule.dataHandlers[0].match);
+            assert.isTrue(ecoule.dataHandlers[0].match({ foo: 'bar' }));
+            refute.isTrue(ecoule.dataHandlers[0].match({ foo: 'baz' }));
 
             done();
         });

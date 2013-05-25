@@ -1,5 +1,5 @@
-# Building an Écoute Data Handler
-The following example is a minimal implementation of an Écoute Data Handler.
+# Building an Écoule Data Handler
+The following example is a minimal implementation of an Écoule Data Handler.
 
     function DataHandler (config) {
         // make it possible for the user to change the matching
@@ -14,7 +14,7 @@ The following example is a minimal implementation of an Écoute Data Handler.
         // `foo` to `'bar'` on the current data entry.
 
         // return done without arguments when done. If an error is
-        // passed in it terminate the entire Écoute process.
+        // passed in it terminate the entire Écoule process.
         return done();
     };
 
@@ -24,7 +24,7 @@ The following example is a minimal implementation of an Écoute Data Handler.
 
 
 ## Data Handler Initalization
-If the data handler implements an `initialize`-function it will get called just after the main Écoute-initialization, along with all the other initialization functions.
+If the data handler implements an `initialize`-function it will get called just after the main Écoule-initialization, along with all the other initialization functions.
 
     function DataHandler (config) {
         this.match = config.match || function () { return true; }
@@ -32,7 +32,7 @@ If the data handler implements an `initialize`-function it will get called just 
 
     DataHandler.prototype.initialize = function (done) {
         // Run code that will initialize the data handler. If `error`
-        // is defined it will terminate the entire Écoute instance
+        // is defined it will terminate the entire Écoule instance
         // and call the main callback function for error-handling.
         done(error);
     };
@@ -45,9 +45,9 @@ If the data handler implements an `initialize`-function it will get called just 
         return (new DataHandler(config));
     };
 
-As with all the other initialization functions, it receives one parameter, a callback function that needs to be called when the initializer is done—if this does not happen, it will hang the parent Écoute instance.
+As with all the other initialization functions, it receives one parameter, a callback function that needs to be called when the initializer is done—if this does not happen, it will hang the parent Écoule instance.
 
-A data handler should initialize connections to databases, check for permissions, and so forth, so it can return an error, and thus terminate the Écoute-instance, if required conditions are not met, before Écoute starts collecting data or outputing data.
+A data handler should initialize connections to databases, check for permissions, and so forth, so it can return an error, and thus terminate the Écoule-instance, if required conditions are not met, before Écoule starts collecting data or outputing data.
 
 
 ## The `match`-Function
@@ -69,9 +69,9 @@ The following is an example of a data handler that let the user redefine the the
         return (new DataHandler(config));
     };
 
-A frame-work such as [Pursuit](https://github.com/gausby/pursuit/) can be used to generate these functions based on a query-language. Écoute uses this internaly various places, and will even compile a match-object into a function if `match` is an object instead of a function.
+A frame-work such as [Pursuit](https://github.com/gausby/pursuit/) can be used to generate these functions based on a query-language. Écoule uses this internaly various places, and will even compile a match-object into a function if `match` is an object instead of a function.
 
-The following example will result in the same functionality as the previous example, but Écoute will use Pursuit to turn the object into a `match`-function.
+The following example will result in the same functionality as the previous example, but Écoule will use Pursuit to turn the object into a `match`-function.
 
     function DataHandler (config) {
         this.match = config.match || { 'title': { equals: 'Foo' }};
@@ -81,7 +81,7 @@ The following example will result in the same functionality as the previous exam
         return (new DataHandler(config));
     };
 
-Any query language builder can be used, but if an object is passed, Écoute will use its own, which is Pursuit.
+Any query language builder can be used, but if an object is passed, Écoule will use its own, which is Pursuit.
 
 
 ## The `execute`-Function
