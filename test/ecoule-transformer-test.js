@@ -88,9 +88,10 @@ buster.testCase('A transformer', {
                 },
                 execute: function (done) {
                     // a 'files' key should be set
-                    assert.defined(this.mock);
+                    assert.defined(this.data);
+                    assert.defined(this.data.mock);
                     // the given query should catch 2 files from the sources
-                    assert.equals(this.mock.length, 2);
+                    assert.equals(this.data.mock.length, 2);
 
                     return done(null, []);
                 }
@@ -123,9 +124,10 @@ buster.testCase('A transformer', {
                 },
                 execute: function (done) {
                     // a 'files' key should be set
-                    assert.defined(this.mock);
+                    assert.defined(this.data);
+                    assert.defined(this.data.mock);
                     // the given query should catch 2 files from the sources
-                    assert.equals(this.mock.length, 2);
+                    assert.equals(this.data.mock.length, 2);
 
                     return done(null, []);
                 }
@@ -150,7 +152,7 @@ buster.testCase('A transformer', {
                     files: { foo: {equals: 'baz'}}
                 },
                 execute: function (done) {
-                    this.files[0].foo = 'bar';
+                    this.data.files[0].foo = 'bar';
                     return done();
                 }
             })]

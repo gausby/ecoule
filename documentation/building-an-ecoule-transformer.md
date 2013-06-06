@@ -44,9 +44,9 @@ The result of the transformation will get passed to the configured outputers.
 
 
 ### Getting Data From the Sources into the Execute Function
-The scope of the execute function is the scope of the execute function itself. It has no access to the Écoule instance, except for the data that will get exposed to it. To get access to the data from the sources, queries can be defined—the result of these queries will be variables containing the queried data.
+The scope of the execute function is the scope of the execute function itself. It has no access to the Écoule instance, except for the data that will get exposed to it. To get access to the data from the sources, queries can be defined—the result of these queries will get stored in an object called data, where the keys are the name of the query and the value is the result.
 
-The the following example will collect all the articles that has a title that starts with an "A" and expose it to the transformer in a variable called `bananas`.
+The the following example will collect all the articles that has a title that starts with an "A" and expose it to the transformer in a variable called `bananas` on the data object.
 
     function Transformer () {
         // Defines a Pursuit query that fetches all the data that has
@@ -63,7 +63,8 @@ The the following example will collect all the articles that has a title that st
 
     Transformer.prototype.execute = function (done) {
         // the result of the query is stored in the variable 'bananas'
-        console.log(this.bananas);
+        // on the data object
+        console.log(this.data.bananas);
 
         return done();
     }
@@ -75,8 +76,6 @@ The the following example will collect all the articles that has a title that st
 The queries are build using the [Pursuit][pursuit]-library. Have a look in the Pursuit documentation for information about building queries.
 
 [pursuit]: https://github.com/gausby/pursuit
-
-**Notice**, `outputs`, `queries`, `preprocessors`, and `postprocessors` are reserved keywords, and should not be used to store results of queries.
 
 
 ## Pre and Post Processors
