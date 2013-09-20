@@ -9,8 +9,8 @@ var buster = require('buster'),
     mockOutput = require('./mocks/output')
 ;
 
-var assert = buster.assertions.assert;
-var refute = buster.assertions.refute;
+var assert = buster.referee.assert;
+var refute = buster.referee.refute;
 
 var basicConfig = {};
 

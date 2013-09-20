@@ -7,8 +7,8 @@ var buster = require('buster'),
     mixin = require('./helpers/mixin')
 ;
 
-var assert = buster.assertions.assert;
-var refute = buster.assertions.refute;
+var assert = buster.referee.assert;
+var refute = buster.referee.refute;
 
 var basicConfig = {};
 
