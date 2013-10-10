@@ -10,10 +10,11 @@ var buster = require('buster'),
 var assert = buster.referee.assert;
 var refute = buster.referee.refute;
 
-var basicConfig = {};
-
 buster.testCase('Ecoule Engine', {
-    'integration test: watership down edition': function (done) {
+    /* This test should pass but has been deferred. Feel free to toy
+     * around with the framework by replacing the '//' with a pop-rocket
+     * '=>' and change the values, functionality, etc. */
+    '// integration test: watership down edition': function (done) {
         /* source =================================================== */
         function Source (config) {
             this.title = config.title || 'Untitled source';
@@ -68,7 +69,7 @@ buster.testCase('Ecoule Engine', {
 
             assert.equals(output, {
                 owsla: [{ name: "BIGWIG" }],
-                rabits: [{ name: "FIVER" }, { name: "BIGWIG" }]
+                rabbits: [{ name: "FIVER" }, { name: "BIGWIG" }]
             });
 
             done(err);
@@ -79,7 +80,7 @@ buster.testCase('Ecoule Engine', {
         var instance = new Ecoule({
             'sources': [
                 new Source({
-                    title: 'test',
+                    title: 'warren',
                     data: [{ name: 'fiver' }, { name: 'bigwig' }]
                 })
             ],
@@ -94,7 +95,7 @@ buster.testCase('Ecoule Engine', {
                 new Transformer ({
                     queries: {
                         owsla: { name: { equals: 'BIGWIG' }},
-                        rabits: { name: { typeOf: 'string' }}
+                        rabbits: { name: { typeOf: 'string' }}
                     },
                     outputs: [
                         new Output({})
