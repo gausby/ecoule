@@ -1,13 +1,13 @@
 {
     "name": "ecoule",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "The Écoule static page engine core",
     "author": "Martin Gausby <martin@gausby.dk>",
     "repository": "git@github.com:gausby/ecoule.git",
     "main": "lib/ecoule.js",
     "dependencies": {
         "operandi": "0.0.5",
-        "pursuit": "0.0.9"
+        "pursuit": "0.0.10"
     },
     "devDependencies": {
         "grunt": "0.4.1",
