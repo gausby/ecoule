@@ -5,7 +5,7 @@ function mockDataHandler (config) {
     this.name = config.name || 'Mock File Handler';
 
     this.initialize = config.initialize;
-    this.match = config.match;
+    this.match = config.match || {};
     this.execute = config.execute;
 }
 

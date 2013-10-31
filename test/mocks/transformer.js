@@ -8,6 +8,7 @@ var Transformer = function (config) {
     this.outputs = config.outputs || [];
     this.preprocessors = config.preprocessors;
     this.postprocessors = config.postprocessors;
+    this.helpers = config.helpers;
 };
 
 module.exports = function (config) {

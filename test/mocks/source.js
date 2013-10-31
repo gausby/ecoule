@@ -6,20 +6,15 @@ var serial = require('operandi').serial;
 function mockSource (config) {
     this.config = config;
 
-    // if (! ('source' in this.config)) {
-    //     this.config.source = './mock-source/';
-    // }
-
     this.title = this.config.title || 'Mock source';
+    this.initialize = config.initialize;
+    this.refresh = config.refresh;
+    this.entries = config.entries;
+
+    this.refresh = config.refresh || function (done) {
+        done(undefined, this.entries);
+    };
 }
-
-mockSource.prototype.refresh = function (done) {
-    done(undefined, this.config.entries);
-};
-
-mockSource.prototype.initialize = function(done) {
-    done();
-};
 
 module.exports = function (options) {
     return (new mockSource(options || {}));
