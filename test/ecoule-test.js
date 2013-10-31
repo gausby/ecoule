@@ -3,8 +3,7 @@
 'use strict';
 
 var buster = require('buster'),
-    Ecoule = require('../lib/ecoule'),
-    mixin = require('./helpers/mixin')
+    Ecoule = require('../lib/ecoule')
 ;
 
 var assert = buster.referee.assert;
@@ -68,8 +67,8 @@ buster.testCase('Ecoule Engine', {
             var err; // undefined, no errors
 
             assert.equals(output, {
-                owsla: [{ name: "BIGWIG" }],
-                rabbits: [{ name: "FIVER" }, { name: "BIGWIG" }]
+                owsla: [{ name: 'BIGWIG' }],
+                rabbits: [{ name: 'FIVER' }, { name: 'BIGWIG' }]
             });
 
             done(err);
