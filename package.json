@@ -1,17 +1,19 @@
 {
     "name": "ecoule",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "description": "The Écoule static page engine core",
     "author": "Martin Gausby <martin@gausby.dk>",
     "repository": "git@github.com:gausby/ecoule.git",
     "main": "lib/ecoule.js",
     "dependencies": {
         "operandi": "0.0.5",
-        "pursuit": "0.2.0"
+        "pursuit": "0.2.0",
+
+        "ecoule-output-object-reference": "0.0.1"
     },
     "devDependencies": {
         "grunt": "0.4.1",
-        "grunt-buster": "0.2.1",
+        "grunt-buster": "0.3.0",
         "grunt-connect": ">= 0.2.0",
         "grunt-contrib-jshint": "0.6.4",
         "grunt-contrib-watch": "0.5.3",
