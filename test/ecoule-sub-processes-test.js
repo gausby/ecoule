@@ -12,7 +12,7 @@ var buster = require('buster'),
 var assert = buster.referee.assert;
 var refute = buster.referee.refute;
 
-var mockFileHandler = require('./mocks/fileHandler');
+var mockDataHandler = require('./mocks/data-handler');
 var mockSource = require('./mocks/source');
 
 buster.testCase('Ecoule sub-processes', {
@@ -77,7 +77,7 @@ buster.testCase('Ecoule sub-processes', {
                     helpers: {
                         'foo': (new Ecoule({
                             transformers:[ mockTransformer() ],
-                            'data-handlers': [mockFileHandler({
+                            'data-handlers': [mockDataHandler({
                                 initialize: function (done) {
                                     this.foo = 'bar';
                                     done();
@@ -104,7 +104,7 @@ buster.testCase('Ecoule sub-processes', {
                             sources: [mockSource({ refresh: function (done) {
                                 return done(undefined, [{ foo: 'bar'}]);
                             }})],
-                            'data-handlers': [mockFileHandler({
+                            'data-handlers': [mockDataHandler({
                                 execute: function (entry, done) {
                                     entry.foo = entry.foo.toUpperCase();
                                     done();
