@@ -4,13 +4,14 @@
 
 var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
-    serial = require('operandi').serial
+    serial = require('operandi').serial,
+
+    mockTransformer = require('ecoule-transformer-mock')
 ;
 
 var assert = buster.referee.assert;
 var refute = buster.referee.refute;
 
-var mockTransformer = require('./mocks/transformer');
 var mockFileHandler = require('./mocks/fileHandler');
 var mockSource = require('./mocks/source');
 

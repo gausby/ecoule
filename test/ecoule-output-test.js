@@ -5,7 +5,7 @@
 var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
     mixin = require('./helpers/mixin'),
-    mockTransformer = require('./mocks/transformer'),
+    mockTransformer = require('ecoule-transformer-mock'),
     mockOutput = require('./mocks/output')
 ;
 

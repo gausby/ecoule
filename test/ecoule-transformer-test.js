@@ -6,7 +6,7 @@ var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
     mixin = require('./helpers/mixin'),
     mockSource = require('./mocks/source'),
-    mockTransformer = require('./mocks/transformer'),
+    mockTransformer = require('ecoule-transformer-mock'),
     serial = require('operandi').serial
 ;
 
