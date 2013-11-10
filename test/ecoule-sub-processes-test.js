@@ -47,8 +47,9 @@ buster.testCase('Ecoule sub-processes', {
                     helpers: {
                         'foo': (new Ecoule({
                             sources: [mockSource({
+                                title: 'foo',
                                 refresh: function (done) {
-                                    done(undefined, true);
+                                    done(undefined, [{foo: 'bar'}]);
                                 }
                             })],
                             transformers:[ mockTransformer() ]
@@ -59,7 +60,10 @@ buster.testCase('Ecoule sub-processes', {
 
             var cb = function (err) {
                 refute.defined(err);
-                assert.equals(ecoule.transformers[0].helpers.foo.sources, {'Mock source': true});
+                assert.equals(
+                    ecoule.transformers[0].helpers.foo.sources.foo.data,
+                    [{'foo': 'bar'}]
+                );
                 done();
             };
 
@@ -118,7 +122,7 @@ buster.testCase('Ecoule sub-processes', {
             var cb = function (err) {
                 refute.defined(err);
                 assert.equals(
-                    ecoule.transformers[0].helpers.foo.sources['Mock source'],
+                    ecoule.transformers[0].helpers.foo.sources['Mock source'].data,
                     [{foo: 'BAR'}]
                 );
                 done();

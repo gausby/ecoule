@@ -61,7 +61,7 @@ buster.testCase('A data-handler', {
             ecoule.runDataHandlers,
             function (done) {
                 assert.equals(
-                    ecoule.sources.first[0].mock,
+                    ecoule.sources.first.data[0].mock,
                     'FOO'
                 );
                 return done();

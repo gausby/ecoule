@@ -15,6 +15,24 @@ var refute = buster.referee.refute;
 var basicConfig = {};
 
 buster.testCase('A source', {
+    'should be able to refresh': function (done) {
+        var ecoule = new Ecoule({
+            sources: [mockSource({
+                title: 'foo',
+                refresh: function (done) {
+                    done(undefined, ['test']);
+                }
+            })]
+        });
+
+        ecoule.initializeSources(function () {
+            ecoule.refreshSources(function () {
+                assert.equals(ecoule.sources.foo.data, ['test']);
+                done();
+            });
+        });
+    },
+
     'should just pass through if no sources is given': function () {
         var ecoule = new Ecoule(mixin(basicConfig, {}));
 
@@ -39,11 +57,11 @@ buster.testCase('A source', {
         var ecoule = new Ecoule(mixin(basicConfig, {
             sources: [
                 mockSource({
-                    'title': 'First Source',
+                    'title': 'first',
                     'entries': [{'title': 'A'}, {'title': 'C'}]
                 }),
                 mockSource({
-                    'title': 'Second Source',
+                    'title': 'second',
                     'entries': [{'title': 'B'}, {'title': 'D'}]
                 })
             ]
@@ -53,10 +71,16 @@ buster.testCase('A source', {
             ecoule.initializeSources,
             ecoule.refreshSources,
             function (done) {
-                assert.equals(ecoule.sources, {
-                    'First Source': [ { title: 'A' }, { title: 'C' } ],
-                    'Second Source': [ { title: 'B' }, { title: 'D' } ]
-                });
+                assert.equals(
+                    ecoule.sources.first.data,
+                    [ { title: 'A' }, { title: 'C' } ]
+                );
+
+                assert.equals(
+                    ecoule.sources.second.data,
+                    [ { title: 'B' }, { title: 'D' } ]
+                );
+
                 return done();
             }
         ], done);

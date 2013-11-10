@@ -164,8 +164,8 @@ buster.testCase('A transformer', {
             ecoule.initializeTransformers,
             ecoule.runTransformers,
             function (done) {
-                assert.defined(ecoule.sources.first[0].foo);
-                assert.equals(ecoule.sources.first[0].foo, 'bar');
+                assert.defined(ecoule.sources.first.data[0].foo);
+                assert.equals(ecoule.sources.first.data[0].foo, 'bar');
 
                 return done();
             }
