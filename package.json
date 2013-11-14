@@ -8,7 +8,7 @@
     "main": "lib/ecoule.js",
     "dependencies": {
         "operandi": "0.0.5",
-        "pursuit": "0.2.0",
+        "pursuit": "0.2.1",
 
         "ecoule-output-object-reference": "0.0.1"
     },
