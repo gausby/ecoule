@@ -4,7 +4,7 @@
 
 var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
-    sources = require('../lib/sources'),
+    sources = require('../lib/ecoule-sources'),
     mixin = require('./helpers/mixin'),
     mockSource = require('./mocks/source'),
     serial = require('operandi').serial

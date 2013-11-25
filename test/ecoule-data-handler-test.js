@@ -4,8 +4,8 @@
 
 var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
-    datahandlers = require('../lib/datahandlers'),
-    sources = require('../lib/sources'),
+    datahandlers = require('../lib/ecoule-data-handlers'),
+    sources = require('../lib/ecoule-sources'),
     mixin = require('./helpers/mixin'),
     mockSource = require('./mocks/source'),
     mockDataHandler = require('./mocks/data-handler'),

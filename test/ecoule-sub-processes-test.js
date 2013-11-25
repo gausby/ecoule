@@ -4,9 +4,9 @@
 
 var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
-    sources = require('../lib/sources'),
-    datahandlers = require('../lib/datahandlers'),
-    transformers = require('../lib/transformers'),
+    sources = require('../lib/ecoule-sources'),
+    datahandlers = require('../lib/ecoule-data-handlers'),
+    transformers = require('../lib/ecoule-transformers'),
     serial = require('operandi').serial,
 
     mockTransformer = require('ecoule-transformer-mock')

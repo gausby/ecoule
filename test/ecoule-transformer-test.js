@@ -4,8 +4,8 @@
 
 var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
-    transformers = require('../lib/transformers'),
-    sources = require('../lib/sources'),
+    transformers = require('../lib/ecoule-transformers'),
+    sources = require('../lib/ecoule-sources'),
     mixin = require('./helpers/mixin'),
     mockSource = require('./mocks/source'),
     mockTransformer = require('ecoule-transformer-mock'),
