@@ -26,8 +26,8 @@ buster.testCase('A source', {
             })]
         });
 
-        sources.initializeSources.call(ecoule, function () {
-            sources.refreshSources.call(ecoule, function () {
+        sources.initialize.call(ecoule, function () {
+            sources.refreshAll.call(ecoule, function () {
                 assert.equals(ecoule.sources.foo.data, ['test']);
                 done();
             });
@@ -37,7 +37,7 @@ buster.testCase('A source', {
     'should just pass through if no sources is given': function () {
         var ecoule = new Ecoule(mixin(basicConfig, {}));
 
-        sources.initializeSources.call(ecoule);
+        sources.initialize.call(ecoule);
 
         assert.equals(Object.keys(ecoule.sources).length, 0);
     },
@@ -49,7 +49,7 @@ buster.testCase('A source', {
             })]
         }));
 
-        sources.initializeSources.call(ecoule);
+        sources.initialize.call(ecoule);
 
         assert.isObject(ecoule.sources['Source Title']);
     },
@@ -69,8 +69,8 @@ buster.testCase('A source', {
         }));
 
         serial.call(ecoule, [
-            sources.initializeSources,
-            sources.refreshSources,
+            sources.initialize,
+            sources.refreshAll,
             function (done) {
                 assert.equals(
                     ecoule.sources.first.data,

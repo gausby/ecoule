@@ -59,8 +59,8 @@ buster.testCase('A data-handler', {
         }));
 
         serial.call(ecoule, [
-            sources.initializeSources,
-            sources.refreshSources,
+            sources.initialize,
+            sources.refreshAll,
             datahandlers.runDataHandlers,
             function (done) {
                 assert.equals(
@@ -79,7 +79,7 @@ buster.testCase('A data-handler', {
             ]
         }));
 
-        serial.call(ecoule, [sources.initializeSources, sources.refreshSources], function() {
+        serial.call(ecoule, [sources.initialize, sources.refreshAll], function() {
             refute.exception(function(){
                 datahandlers.runDataHandlers.call(ecoule, function(){});
             });

@@ -72,7 +72,7 @@ buster.testCase('Ecoule sub-processes', {
 
             serial.call(ecoule, [
                 transformers.initializeTransformers,
-                sources.refreshSources
+                sources.refreshAll
             ], cb);
         }
     },
@@ -133,7 +133,7 @@ buster.testCase('Ecoule sub-processes', {
 
             serial.call(ecoule, [
                 transformers.initializeTransformers,
-                sources.refreshSources,
+                sources.refreshAll,
                 datahandlers.runDataHandlers
             ], cb);
         }
