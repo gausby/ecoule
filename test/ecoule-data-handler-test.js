@@ -31,7 +31,7 @@ buster.testCase('A data-handler', {
             ]
         }));
 
-        datahandlers.initializeDataHandlers.call(ecoule, function (err) {
+        datahandlers.initialize.call(ecoule, function (err) {
             assert.isTrue(ran);
             done();
         });
@@ -61,7 +61,7 @@ buster.testCase('A data-handler', {
         serial.call(ecoule, [
             sources.initialize,
             sources.refreshAll,
-            datahandlers.runDataHandlers,
+            datahandlers.execute,
             function (done) {
                 assert.equals(
                     ecoule.sources.first.data[0].mock,
@@ -81,7 +81,7 @@ buster.testCase('A data-handler', {
 
         serial.call(ecoule, [sources.initialize, sources.refreshAll], function() {
             refute.exception(function(){
-                datahandlers.runDataHandlers.call(ecoule, function(){});
+                datahandlers.execute.call(ecoule, function(){});
             });
 
             done();
@@ -97,7 +97,7 @@ buster.testCase('A data-handler', {
             ]
         }));
 
-        serial.call(ecoule, [datahandlers.initializeDataHandlers], function() {
+        serial.call(ecoule, [datahandlers.initialize], function() {
             assert.isFunction(ecoule.dataHandlers[0].match);
             assert.isTrue(ecoule.dataHandlers[0].match({ foo: 'bar' }));
             refute.isTrue(ecoule.dataHandlers[0].match({ foo: 'baz' }));

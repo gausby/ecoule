@@ -134,7 +134,7 @@ buster.testCase('Ecoule sub-processes', {
             serial.call(ecoule, [
                 transformers.initializeTransformers,
                 sources.refreshAll,
-                datahandlers.runDataHandlers
+                datahandlers.execute
             ], cb);
         }
     },
