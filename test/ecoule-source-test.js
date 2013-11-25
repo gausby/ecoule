@@ -85,5 +85,23 @@ buster.testCase('A source', {
                 return done();
             }
         ], done);
+    },
+
+    'should run an optional before-function before running refresh': function (done) {
+        var spy = this.spy();
+
+        sources.refresh(mockSource({ before: function(done) { spy(); done(); }}), function () {
+            assert.calledOnce(spy);
+            done();
+        });
+    },
+
+    'should run an optional after-function after running refresh': function (done) {
+        var spy = this.spy();
+
+        sources.refresh(mockSource({ after: function(done) { spy(); done(); }}), function () {
+            assert.calledOnce(spy);
+            done();
+        });
     }
 });

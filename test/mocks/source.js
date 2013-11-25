@@ -11,6 +11,9 @@ function mockSource (config) {
     this.refresh = config.refresh;
     this.entries = config.entries;
 
+    this.before = config.before;
+    this.after = config.after;
+
     this.refresh = config.refresh || function (done) {
         done(undefined, this.entries);
     };
