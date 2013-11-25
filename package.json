@@ -1,6 +1,6 @@
 {
     "name": "ecoule",
-    "version": "0.0.16",
+    "version": "0.0.17",
     "description": "The Écoule static page engine core",
     "author": "Martin Gausby <martin@gausby.dk>",
     "repository": "git@github.com:gausby/ecoule.git",
