@@ -22,7 +22,7 @@ buster.testCase('A transformer', {
         var ecoule = new Ecoule(mixin(basicConfig));
 
         refute.exception(function() {
-            transformers.initializeTransformers.call(ecoule, function () {
+            transformers.initializeAll.call(ecoule, function () {
                 done();
             });
         });
@@ -39,7 +39,7 @@ buster.testCase('A transformer', {
         }));
 
         serial.call(ecoule, [
-            transformers.initializeTransformers,
+            transformers.initializeAll,
             function (done) {
                 assert.equals(ecoule.transformers[0].foo, 'bar');
                 return done();
@@ -59,7 +59,7 @@ buster.testCase('A transformer', {
         }));
 
         serial.call(ecoule, [
-            transformers.initializeTransformers,
+            transformers.initializeAll,
             function (done) {
                 assert.isFunction(ecoule.transformers[0].queries.mock);
                 // the query language is tested elsewhere
@@ -103,8 +103,8 @@ buster.testCase('A transformer', {
         serial.call(ecoule, [
             sources.initialize,
             sources.refreshAll,
-            transformers.initializeTransformers,
-            transformers.runTransformers
+            transformers.initializeAll,
+            transformers.executeAll
         ], done);
     },
 
@@ -139,8 +139,8 @@ buster.testCase('A transformer', {
         serial.call(ecoule, [
             sources.initialize,
             sources.refreshAll,
-            transformers.initializeTransformers,
-            transformers.runTransformers
+            transformers.initializeAll,
+            transformers.executeAll
         ], done);
     },
 
@@ -163,8 +163,8 @@ buster.testCase('A transformer', {
         serial.call(ecoule, [
             sources.initialize,
             sources.refreshAll,
-            transformers.initializeTransformers,
-            transformers.runTransformers,
+            transformers.initializeAll,
+            transformers.executeAll,
             function (done) {
                 assert.defined(ecoule.sources.first.data[0].foo);
                 assert.equals(ecoule.sources.first.data[0].foo, 'bar');
@@ -196,7 +196,7 @@ buster.testCase('A transformer', {
 
         test.foo = 'bar';
         var ecoule = new Ecoule(mixin(basicConfig, { transformers: [test] }));
-        transformers.runTransformers.call(ecoule, done);
+        transformers.executeAll.call(ecoule, done);
     },
 
     'should run postprocessors on the transformer output before giving it to the outputs': function (done) {
@@ -221,6 +221,6 @@ buster.testCase('A transformer', {
 
         test.foo = 'bar';
         var ecoule = new Ecoule(mixin(basicConfig, { transformers: [test] }));
-        transformers.runTransformers.call(ecoule, done);
+        transformers.executeAll.call(ecoule, done);
     }
 });

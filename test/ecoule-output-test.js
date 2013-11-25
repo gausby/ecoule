@@ -103,7 +103,7 @@ buster.testCase('An output', {
             ]
         })]});
 
-        transformers.runTransformers.call(ecoule, function(err) {
+        transformers.executeAll.call(ecoule, function(err) {
             refute.defined(err);
             done();
         });

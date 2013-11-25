@@ -37,7 +37,7 @@ buster.testCase('Ecoule sub-processes', {
                 }))]
             });
 
-            transformers.initializeTransformers.call(ecoule, function (err) {
+            transformers.initializeAll.call(ecoule, function (err) {
                 refute.defined(err);
                 assert.equals(ecoule.transformers[0].helpers.foo.config.sources[0].foo, 'bar');
                 done();
@@ -71,7 +71,7 @@ buster.testCase('Ecoule sub-processes', {
             };
 
             serial.call(ecoule, [
-                transformers.initializeTransformers,
+                transformers.initializeAll,
                 sources.refreshAll
             ], cb);
         }
@@ -95,7 +95,7 @@ buster.testCase('Ecoule sub-processes', {
                 }))]
             });
 
-            transformers.initializeTransformers.call(ecoule, function (err) {
+            transformers.initializeAll.call(ecoule, function (err) {
                 refute.defined(err);
                 assert.equals(ecoule.transformers[0].helpers.foo.dataHandlers[0].foo, 'bar');
                 done();
@@ -132,7 +132,7 @@ buster.testCase('Ecoule sub-processes', {
             };
 
             serial.call(ecoule, [
-                transformers.initializeTransformers,
+                transformers.initializeAll,
                 sources.refreshAll,
                 datahandlers.execute
             ], cb);
@@ -156,7 +156,7 @@ buster.testCase('Ecoule sub-processes', {
                 }))]
             });
 
-            transformers.initializeTransformers.call(ecoule, function(err) {
+            transformers.initializeAll.call(ecoule, function(err) {
                 refute.defined(err);
                 assert.equals(ecoule.transformers[0].helpers.foo.transformers[0].foo, 'bar');
                 done();
@@ -188,8 +188,8 @@ buster.testCase('Ecoule sub-processes', {
             };
 
             serial.call(ecoule, [
-                transformers.initializeTransformers,
-                transformers.runTransformers
+                transformers.initializeAll,
+                transformers.executeAll
             ], cb);
         }
     }
