@@ -4,6 +4,8 @@
 
 var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
+    outputs = require('../lib/outputs'),
+    transformers = require('../lib/transformers'),
     mixin = require('./helpers/mixin'),
     mockTransformer = require('ecoule-transformer-mock'),
     mockOutput = require('./mocks/output')
@@ -22,7 +24,7 @@ buster.testCase('An output', {
             })]
         }));
 
-        ecoule.initializeOutputs(function (err) {
+        outputs.initializeOutputs.call(ecoule, function (err) {
             refute.defined(err);
             done();
         });
@@ -42,7 +44,7 @@ buster.testCase('An output', {
             })]
         }));
 
-        ecoule.initializeOutputs(function () {
+        outputs.initializeOutputs.call(ecoule, function () {
             assert.isTrue(test);
             done();
         });
@@ -77,7 +79,7 @@ buster.testCase('An output', {
             })]
         }));
 
-        ecoule.initializeOutputs(function () {
+        outputs.initializeOutputs.call(ecoule, function () {
             assert.isTrue(foo);
             assert.isTrue(bar);
             assert.isTrue(baz);
@@ -101,7 +103,7 @@ buster.testCase('An output', {
             ]
         })]});
 
-        ecoule.runTransformers(function(err) {
+        transformers.runTransformers.call(ecoule, function(err) {
             refute.defined(err);
             done();
         });

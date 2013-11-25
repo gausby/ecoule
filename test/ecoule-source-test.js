@@ -4,6 +4,7 @@
 
 var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
+    sources = require('../lib/sources'),
     mixin = require('./helpers/mixin'),
     mockSource = require('./mocks/source'),
     serial = require('operandi').serial
@@ -25,8 +26,8 @@ buster.testCase('A source', {
             })]
         });
 
-        ecoule.initializeSources(function () {
-            ecoule.refreshSources(function () {
+        sources.initializeSources.call(ecoule, function () {
+            sources.refreshSources.call(ecoule, function () {
                 assert.equals(ecoule.sources.foo.data, ['test']);
                 done();
             });
@@ -36,7 +37,7 @@ buster.testCase('A source', {
     'should just pass through if no sources is given': function () {
         var ecoule = new Ecoule(mixin(basicConfig, {}));
 
-        ecoule.initializeSources();
+        sources.initializeSources.call(ecoule);
 
         assert.equals(Object.keys(ecoule.sources).length, 0);
     },
@@ -48,7 +49,7 @@ buster.testCase('A source', {
             })]
         }));
 
-        ecoule.initializeSources();
+        sources.initializeSources.call(ecoule);
 
         assert.isObject(ecoule.sources['Source Title']);
     },
@@ -68,8 +69,8 @@ buster.testCase('A source', {
         }));
 
         serial.call(ecoule, [
-            ecoule.initializeSources,
-            ecoule.refreshSources,
+            sources.initializeSources,
+            sources.refreshSources,
             function (done) {
                 assert.equals(
                     ecoule.sources.first.data,

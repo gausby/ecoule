@@ -4,6 +4,9 @@
 
 var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
+    sources = require('../lib/sources'),
+    datahandlers = require('../lib/datahandlers'),
+    transformers = require('../lib/transformers'),
     serial = require('operandi').serial,
 
     mockTransformer = require('ecoule-transformer-mock')
@@ -34,7 +37,7 @@ buster.testCase('Ecoule sub-processes', {
                 }))]
             });
 
-            ecoule.initializeTransformers(function (err) {
+            transformers.initializeTransformers.call(ecoule, function (err) {
                 refute.defined(err);
                 assert.equals(ecoule.transformers[0].helpers.foo.config.sources[0].foo, 'bar');
                 done();
@@ -68,8 +71,8 @@ buster.testCase('Ecoule sub-processes', {
             };
 
             serial.call(ecoule, [
-                ecoule.initializeTransformers,
-                ecoule.refreshSources
+                transformers.initializeTransformers,
+                sources.refreshSources
             ], cb);
         }
     },
@@ -92,7 +95,7 @@ buster.testCase('Ecoule sub-processes', {
                 }))]
             });
 
-            ecoule.initializeTransformers(function (err) {
+            transformers.initializeTransformers.call(ecoule, function (err) {
                 refute.defined(err);
                 assert.equals(ecoule.transformers[0].helpers.foo.dataHandlers[0].foo, 'bar');
                 done();
@@ -129,9 +132,9 @@ buster.testCase('Ecoule sub-processes', {
             };
 
             serial.call(ecoule, [
-                ecoule.initializeTransformers,
-                ecoule.refreshSources,
-                ecoule.runDataHandlers
+                transformers.initializeTransformers,
+                sources.refreshSources,
+                datahandlers.runDataHandlers
             ], cb);
         }
     },
@@ -153,7 +156,7 @@ buster.testCase('Ecoule sub-processes', {
                 }))]
             });
 
-            ecoule.initializeTransformers(function(err) {
+            transformers.initializeTransformers.call(ecoule, function(err) {
                 refute.defined(err);
                 assert.equals(ecoule.transformers[0].helpers.foo.transformers[0].foo, 'bar');
                 done();
@@ -185,8 +188,8 @@ buster.testCase('Ecoule sub-processes', {
             };
 
             serial.call(ecoule, [
-                ecoule.initializeTransformers,
-                ecoule.runTransformers
+                transformers.initializeTransformers,
+                transformers.runTransformers
             ], cb);
         }
     }

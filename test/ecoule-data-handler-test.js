@@ -4,6 +4,8 @@
 
 var buster = require('buster'),
     Ecoule = require('../lib/ecoule'),
+    datahandlers = require('../lib/datahandlers'),
+    sources = require('../lib/sources'),
     mixin = require('./helpers/mixin'),
     mockSource = require('./mocks/source'),
     mockDataHandler = require('./mocks/data-handler'),
@@ -29,11 +31,12 @@ buster.testCase('A data-handler', {
             ]
         }));
 
-        ecoule.initializeDataHandlers(function (err) {
+        datahandlers.initializeDataHandlers.call(ecoule, function (err) {
             assert.isTrue(ran);
             done();
         });
     },
+
     'should handle matched files': function (done) {
         var ecoule = new Ecoule(mixin(basicConfig, {
             sources: [
@@ -56,9 +59,9 @@ buster.testCase('A data-handler', {
         }));
 
         serial.call(ecoule, [
-            ecoule.initializeSources,
-            ecoule.refreshSources,
-            ecoule.runDataHandlers,
+            sources.initializeSources,
+            sources.refreshSources,
+            datahandlers.runDataHandlers,
             function (done) {
                 assert.equals(
                     ecoule.sources.first.data[0].mock,
@@ -76,14 +79,15 @@ buster.testCase('A data-handler', {
             ]
         }));
 
-        serial.call(ecoule, [ecoule.initializeSources, ecoule.refreshSources], function() {
+        serial.call(ecoule, [sources.initializeSources, sources.refreshSources], function() {
             refute.exception(function(){
-                ecoule.runDataHandlers(function(){});
+                datahandlers.runDataHandlers.call(ecoule, function(){});
             });
 
             done();
         });
     },
+
     'should compile a match function using Pursuit if an object is passed as the match function': function (done) {
         var ecoule = new Ecoule(mixin(basicConfig, {
             'data-handlers': [
@@ -93,7 +97,7 @@ buster.testCase('A data-handler', {
             ]
         }));
 
-        serial.call(ecoule, [ecoule.initializeDataHandlers], function() {
+        serial.call(ecoule, [datahandlers.initializeDataHandlers], function() {
             assert.isFunction(ecoule.dataHandlers[0].match);
             assert.isTrue(ecoule.dataHandlers[0].match({ foo: 'bar' }));
             refute.isTrue(ecoule.dataHandlers[0].match({ foo: 'baz' }));
