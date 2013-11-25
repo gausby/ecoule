@@ -24,7 +24,7 @@ buster.testCase('An output', {
             })]
         }));
 
-        outputs.initializeOutputs.call(ecoule, function (err) {
+        outputs.initialize.call(ecoule, function (err) {
             refute.defined(err);
             done();
         });
@@ -44,7 +44,7 @@ buster.testCase('An output', {
             })]
         }));
 
-        outputs.initializeOutputs.call(ecoule, function () {
+        outputs.initialize.call(ecoule, function () {
             assert.isTrue(test);
             done();
         });
@@ -79,7 +79,7 @@ buster.testCase('An output', {
             })]
         }));
 
-        outputs.initializeOutputs.call(ecoule, function () {
+        outputs.initialize.call(ecoule, function () {
             assert.isTrue(foo);
             assert.isTrue(bar);
             assert.isTrue(baz);
