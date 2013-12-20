@@ -101,7 +101,7 @@ buster.testCase('A transformer', {
         }));
 
         serial.call(ecoule, [
-            sources.initialize,
+            sources.initializeAll,
             sources.refreshAll,
             transformers.initializeAll,
             transformers.executeAll
@@ -137,7 +137,7 @@ buster.testCase('A transformer', {
         }));
 
         serial.call(ecoule, [
-            sources.initialize,
+            sources.initializeAll,
             sources.refreshAll,
             transformers.initializeAll,
             transformers.executeAll
@@ -161,7 +161,7 @@ buster.testCase('A transformer', {
         }));
 
         serial.call(ecoule, [
-            sources.initialize,
+            sources.initializeAll,
             sources.refreshAll,
             transformers.initializeAll,
             transformers.executeAll,
