@@ -103,5 +103,103 @@ buster.testCase('A source', {
             assert.calledOnce(spy);
             done();
         });
+    },
+
+    'with helpers': {
+        'should initialize its helpers': function (done) {
+            var spy = this.spy();
+            var mock = { sources: {} };
+
+            var source = mockSource({
+                helpers: [
+                    mockSource({
+                        initialize: function(done) {
+                            spy();
+                            done();
+                        }
+                    })
+                ]
+            });
+
+            sources.initialize.call(mock, source, function () {
+                assert.calledOnce(spy);
+                done();
+            });
+        },
+
+        'should make the helpers output available to its parent': function (done) {
+            var mock = { sources: {} };
+
+            var source = mockSource({
+                helpers: [
+                    mockSource({ title: 'child', entries: [{foo: 'bar'}] })
+                ],
+                refresh: function (done) {
+                    assert.equals(this.sources.child.data, [{foo: 'bar'}]);
+                    done();
+                }
+            });
+
+            sources.initialize.call(mock, source, function () {
+                sources.refresh.call(mock, source, done);
+            });
+        },
+
+        'should pass initialization errors to the main process': function (done) {
+            var mock = { sources: {} };
+
+            var source = mockSource({
+                helpers: [
+                    mockSource({
+                        initialize: function(done) {
+                            done(new Error('foo'));
+                        }
+                    })
+                ]
+            });
+
+            sources.initialize.call(mock, source, function (err) {
+                assert.isTrue(err instanceof Error);
+                done();
+            });
+        },
+
+        'should throw refresh errors to the main process': function (done) {
+            var mock = { sources: {} };
+
+            var source = mockSource({
+                helpers: [
+                    mockSource({
+                        refresh: function(done) {
+                            done(new Error('ouch!'));
+                        }
+                    })
+                ]
+            });
+
+            sources.initialize.call(mock, source, function () {
+                sources.refresh.call(mock, source, function (err) {
+                    assert.isTrue(err instanceof Error);
+                    done();
+                });
+            });
+        },
+
+        'should throw an error if the key sources is already set': function (done) {
+            var mock = { sources: {} };
+
+            var source = mockSource({
+                initialize: function (done) {
+                    this.sources = 'test';
+                    done();
+                },
+                helpers: [mockSource()]
+            });
+
+            sources.initialize.call(mock, source, function (err) {
+                assert.isTrue(err instanceof Error);
+                done();
+            });
+        }
     }
 });

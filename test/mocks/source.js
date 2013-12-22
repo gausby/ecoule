@@ -10,6 +10,7 @@ function mockSource (config) {
     this.initialize = config.initialize;
     this.refresh = config.refresh;
     this.entries = config.entries;
+    this.helpers = config.helpers;
 
     this.before = config.before;
     this.after = config.after;
