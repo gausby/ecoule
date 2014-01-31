@@ -1,7 +1,9 @@
 # Écoule - A Static Page Generator-Engine
-Écoule is a static page generator engine, written in JavaScript, that runs in a server side javascript-environment. It collects data from one or more sources, processes it, and output it to one or more outputs.
+Écoule is a static page generator engine, written in JavaScript. That means, you feed some raw material into a pipe, and you get something different (often more valuable) out.  Ecoule collects data from one or more sources, assembles it, allows processing and provides one or more outputs.
 
-It can, amongst other things, be used to build static blog generators.
+To run Ecoule, you must use Node.js and install plugins for processing your data. The main use case of Ecoule is generating HTML for the web, such as blogs, but the output can also be formats such as EPUB.
+
+The processing steps in Ecoule are mapped to different phases: Initialization, data collection, data refinement, data transformation and data output (or formatting). All stages can be configured with plugins.
 
 
 ## Life Cycle
@@ -11,7 +13,7 @@ An Écoule life cycle begins with reading a configuration object passed to its c
 
 This is interesting enough in itself, but to make it do something we should really pass in a configuration. *Read more about the configuration-object in the Écoule Configuration Object-section.*
 
-When the the `refresh`-function is called on the Écoule-instance, it will proceed to **the initialization stage**, where all the plugins that implements an initialize function will initialize.
+When the the `refresh`-function is called on the Écoule-instance, it will proceed to **the initialization stage**, where all plugins that implement an `initialize` function will invoke the initialization.
 
 During the initialization stage a plugin can stop the entire Écoule instance from running—this is useful if an output needs to communicate with a database, and no database is writable; or a source needs to fetch data from the internet, but no internet connection is available; or a template system fails to compile a template, etc.
 
